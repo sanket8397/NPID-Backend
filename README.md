@@ -1,6 +1,6 @@
-<img src = "Image/logoreadme.jpg"># NPID
+<h1><img src = "Image/logoreadme.jpg">  NPID:National Police Incident Database  </h1>
 
-National Police Incident Database 
+
 
 Aim: A user-friendly web application that serves as a central hub for collecting, verifying, and
 visualizing data related to police-involved incidents across the United States. The app provides essential details such as location, involved parties, and descriptions. The app places a strong
