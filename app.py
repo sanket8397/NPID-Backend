@@ -11,8 +11,6 @@ df = pd.read_csv(csv_file, encoding='latin-1')
 states = df['state'].unique()
 cities = df['city'].unique()
 
-print(states,cities)
-
 # Define an endpoint to get a list of unique states
 @app.route('/states', methods=['GET'])
 def get_states():
@@ -24,7 +22,7 @@ def get_cities():
     return jsonify(cities.tolist())
 
 # Define an endpoint to get cities for a specific state
-@app.route('/cities/<state>', methods=['GET'])
+@app.route('/<state>', methods=['GET'])
 def get_cities_by_state(state):
     cities_in_state = df[df['state'] == state]['city'].unique()
     return jsonify(cities_in_state.tolist())
