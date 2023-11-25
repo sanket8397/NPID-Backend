@@ -65,3 +65,18 @@ def get_manner_of_death_query(years):
             GROUP BY ?manner_of_death
         """
     return query
+
+def get_armed_with_query(years):
+    query = f"""
+            {prefixes}
+
+            SELECT ?weapon (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:wasArmedWith ?weapon.
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?weapon
+        """
+    return query

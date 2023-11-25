@@ -30,5 +30,10 @@ def manner_of_death_route():
     years_list = request.args.getlist('year')
     return jsonify(get_manner_of_death_data(years_list))
 
+@app.route('/api/summary/armedwith', methods=['GET'])
+def armed_with_route():
+    years_list = request.args.getlist('year')
+    return jsonify(get_armed_with_data(years_list))
+
 if __name__ == '__main__':
     app.run(debug=True)
