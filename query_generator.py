@@ -4,6 +4,8 @@ prefixes = """
     PREFIX ont: <http://www.semanticweb.org/keyapatel/ontologies/2023/9/police-killings#>
 """
 
+######################### Summary Queries ############################
+
 
 def get_map_query(years):
     query = f"""
@@ -110,3 +112,5 @@ def get_mental_illness_query(years):
             GROUP BY ?mental_illness
         """
     return query
+
+######################### Summary Queries ############################

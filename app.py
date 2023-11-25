@@ -7,6 +7,8 @@ app = Flask(__name__)
 def hello():
     return jsonify({"message": "Hello, World!"})
 
+######################### Summary routes ############################
+
 # http://127.0.0.1:5000/api/summary/map?year=2015&year=2016&year=2017
 # http://127.0.0.1:5000/api/summary/map
 
@@ -44,6 +46,9 @@ def fleeing_route():
 def mental_illness_route():
     years_list = request.args.getlist('year')
     return jsonify(get_mental_illness_data(years_list))
+
+######################### Summary routes ############################
+
 
 if __name__ == '__main__':
     app.run(debug=True)
