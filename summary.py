@@ -1,9 +1,9 @@
 from query_generator import *
 from utils import *
 
-
-def get_map_data():
-    query = get_map_query()
+# Year functionality yet to add
+def get_map_data(years):
+    query = get_map_query(years)
     results = execute_sparql(query)
     # print(results)
 

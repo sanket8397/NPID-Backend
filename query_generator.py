@@ -5,15 +5,17 @@ prefixes = """
 """
 
 
-def get_map_query():
+def get_map_query(years):
     map_query = f"""
             {prefixes}
 
             SELECT ?stateName (STR(COUNT(?victim)) AS ?victimCount)
             WHERE {{
                 ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
                 ?victim ont:livesInState ?state.
                 ?state ont:hasStateName ?stateName.
+                FILTER(?deathyear IN ({years}))
             }}
             GROUP BY ?stateName
         """
