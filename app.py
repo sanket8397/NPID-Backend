@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from summary import *
+from state_city import *
 
 app = Flask(__name__)
 
@@ -49,6 +50,11 @@ def mental_illness_route():
 
 ######################### Summary routes ############################
 
+######################### State City routes ############################
+@app.route('/api/statecity/cities', methods=['GET'])
+def cities_route():
+    state = request.args.get('state')
+    return jsonify(get_cities(state))
 
 if __name__ == '__main__':
     app.run(debug=True)

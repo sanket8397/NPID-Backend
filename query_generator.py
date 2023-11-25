@@ -114,3 +114,21 @@ def get_mental_illness_query(years):
     return query
 
 ######################### Summary Queries ############################
+
+######################### State City Queries ############################
+
+def get_cities_query(state):
+    query = f"""
+            {prefixes}
+
+            SELECT ?cityName
+            WHERE {{
+                ?state rdf:type ont:state.
+                ?state ont:hasStateName "{state}".
+                ?state ont:hasCity ?city.
+                ?city ont:cityName ?cityName.
+            }}
+        """
+    return query
+
+######################### State City Queries ############################
