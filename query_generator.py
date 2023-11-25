@@ -35,3 +35,18 @@ def get_gender_query(years):
             GROUP BY ?gender
         """
     return map_query
+
+def get_race_query(years):
+    map_query = f"""
+            {prefixes}
+
+            SELECT ?race (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:hasRace ?race.
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?race
+        """
+    return map_query

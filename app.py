@@ -20,6 +20,10 @@ def gender_route():
     years_list = request.args.getlist('year')
     return jsonify(get_gender_data(years_list))
 
+@app.route('/api/summary/race', methods=['GET'])
+def race_route():
+    years_list = request.args.getlist('year')
+    return jsonify(get_race_data(years_list))
 
 if __name__ == '__main__':
     app.run(debug=True)

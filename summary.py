@@ -40,3 +40,24 @@ def get_gender_data(years_list):
 
     return victim_data
 
+def get_race_data(years_list):
+    if not years_list:
+        years_list = ['2015', '2016', '2017']
+    years = ' ,'.join(years_list)
+    print(years)
+    query = get_race_query(years)
+    results = execute_sparql(query)
+    # print(results)
+
+    race_mapping = {"W": "White", "H": "Hispanic", "A": "Asian", "B": "Black", "N": "Native American", "O": "Other"}
+
+    victim_data = []
+    for result in results["results"]["bindings"]:
+        race = result["race"]["value"]
+        victim_cnt = result["victimCount"]["value"]
+        victim_count = {}
+        victim_count["race"] = race_mapping[race] 
+        victim_count["count"] = victim_cnt
+        victim_data.append(victim_count)
+
+    return victim_data
