@@ -80,3 +80,18 @@ def get_armed_with_query(years):
             GROUP BY ?weapon
         """
     return query
+
+def get_fleeing_query(years):
+    query = f"""
+            {prefixes}
+
+            SELECT ?fleeing (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:wasFleeing ?fleeing.
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?fleeing
+        """
+    return query

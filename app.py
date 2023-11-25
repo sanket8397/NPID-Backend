@@ -35,5 +35,10 @@ def armed_with_route():
     years_list = request.args.getlist('year')
     return jsonify(get_armed_with_data(years_list))
 
+@app.route('/api/summary/fleeing', methods=['GET'])
+def fleeing_route():
+    years_list = request.args.getlist('year')
+    return jsonify(get_fleeing_data(years_list))
+
 if __name__ == '__main__':
     app.run(debug=True)
