@@ -11,5 +11,6 @@
 #     print(f"State: {state_name}, Victim Count: {victim_count}")
 
 from state_city import *
-a = get_cities('CA')
-print(a)
+a = get_cities_original('CA')
+b = get_median_income(a)
+print(b)

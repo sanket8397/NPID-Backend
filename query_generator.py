@@ -131,4 +131,44 @@ def get_cities_query(state):
         """
     return query
 
+def get_median_income_query(cities):
+    query = f"""
+            {prefixes}
+
+            SELECT ?cityName (str(?medianIncome) as ?median_income)
+            WHERE {{
+                ?city ont:cityName ?cityName.
+                ?city ont:medianHousehold ?medianIncome.
+                FILTER(?cityName IN ({cities}))
+            }}
+        """
+    return query
+
+def get_poverty_query(cities):
+    query = f"""
+            {prefixes}
+
+            SELECT ?cityName (str(?PovertyRate) as ?poverty_rate)
+            WHERE {{
+                ?city ont:cityName ?cityName.
+                ?city ont:PovertyRate ?PovertyRate.
+                FILTER(?cityName IN ({cities}))
+            }}
+        """
+    return query
+
+def get_highschool_grad_rate_query(cities):
+    query = f"""
+            {prefixes}
+
+            SELECT ?cityName (str(?highSchoolGrad) as ?highschool_grad_rate)
+            WHERE {{
+                ?city ont:cityName ?cityName.
+                ?city ont:highSchoolGradRate ?highSchoolGrad.
+                FILTER(?cityName IN ({cities}))
+            }}
+        """
+    return query
+
+
 ######################### State City Queries ############################

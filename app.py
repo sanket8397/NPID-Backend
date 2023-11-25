@@ -56,5 +56,23 @@ def cities_route():
     state = request.args.get('state')
     return jsonify(get_cities(state))
 
+@app.route('/api/statecity/income', methods=['GET'])
+def cities_income_route():
+    state = request.args.get('state')
+    cities = get_cities_original(state)
+    return jsonify(get_median_income(cities))
+
+@app.route('/api/statecity/poverty', methods=['GET'])
+def cities_poverty_route():
+    state = request.args.get('state')
+    cities = get_cities_original(state)
+    return jsonify(get_poverty_rate(cities))
+
+@app.route('/api/statecity/gradrate', methods=['GET'])
+def cities_highschool_grad_rate_route():
+    state = request.args.get('state')
+    cities = get_cities_original(state)
+    return jsonify(get_highschool_grad_rate(cities))
+
 if __name__ == '__main__':
     app.run(debug=True)
