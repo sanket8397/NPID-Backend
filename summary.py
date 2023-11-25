@@ -7,7 +7,6 @@ def get_map_data(years_list):
     years = ' ,'.join(years_list)
     query = get_map_query(years)
     results = execute_sparql(query)
-    # print(results)
 
     state_victim_data = []
     for result in results["results"]["bindings"]:
@@ -27,7 +26,6 @@ def get_gender_data(years_list):
     print(years)
     query = get_gender_query(years)
     results = execute_sparql(query)
-    # print(results)
 
     victim_data = []
     for result in results["results"]["bindings"]:
@@ -47,7 +45,6 @@ def get_race_data(years_list):
     print(years)
     query = get_race_query(years)
     results = execute_sparql(query)
-    # print(results)
 
     race_mapping = {"W": "White", "H": "Hispanic", "A": "Asian", "B": "Black", "N": "Native American", "O": "Other"}
 
@@ -69,7 +66,6 @@ def get_manner_of_death_data(years_list):
     print(years)
     query = get_manner_of_death_query(years)
     results = execute_sparql(query)
-    # print(results)
 
     victim_data = []
     for result in results["results"]["bindings"]:
@@ -89,7 +85,6 @@ def get_armed_with_data(years_list):
     print(years)
     query = get_armed_with_query(years)
     results = execute_sparql(query)
-    # print(results)
 
     victim_data = []
     for result in results["results"]["bindings"]:
@@ -109,7 +104,6 @@ def get_fleeing_data(years_list):
     print(years)
     query = get_fleeing_query(years)
     results = execute_sparql(query)
-    # print(results)
 
     victim_data = []
     for result in results["results"]["bindings"]:
@@ -129,7 +123,6 @@ def get_mental_illness_data(years_list):
     print(years)
     query = get_mental_illness_query(years)
     results = execute_sparql(query)
-    # print(results)
 
     victim_data = []
     for result in results["results"]["bindings"]:
