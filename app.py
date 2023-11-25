@@ -25,5 +25,10 @@ def race_route():
     years_list = request.args.getlist('year')
     return jsonify(get_race_data(years_list))
 
+@app.route('/api/summary/mannerofdeath', methods=['GET'])
+def manner_of_death_route():
+    years_list = request.args.getlist('year')
+    return jsonify(get_manner_of_death_data(years_list))
+
 if __name__ == '__main__':
     app.run(debug=True)

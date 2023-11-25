@@ -6,7 +6,7 @@ prefixes = """
 
 
 def get_map_query(years):
-    map_query = f"""
+    query = f"""
             {prefixes}
 
             SELECT ?stateName (STR(COUNT(?victim)) AS ?victimCount)
@@ -19,10 +19,10 @@ def get_map_query(years):
             }}
             GROUP BY ?stateName
         """
-    return map_query
+    return query
 
 def get_gender_query(years):
-    map_query = f"""
+    query = f"""
             {prefixes}
 
             SELECT ?gender (STR(COUNT(?victim)) AS ?victimCount)
@@ -34,10 +34,10 @@ def get_gender_query(years):
             }}
             GROUP BY ?gender
         """
-    return map_query
+    return query
 
 def get_race_query(years):
-    map_query = f"""
+    query = f"""
             {prefixes}
 
             SELECT ?race (STR(COUNT(?victim)) AS ?victimCount)
@@ -49,4 +49,19 @@ def get_race_query(years):
             }}
             GROUP BY ?race
         """
-    return map_query
+    return query
+
+def get_manner_of_death_query(years):
+    query = f"""
+            {prefixes}
+
+            SELECT ?manner_of_death (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:mannerOfDeath ?manner_of_death.
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?manner_of_death
+        """
+    return query
