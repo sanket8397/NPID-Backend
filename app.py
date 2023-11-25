@@ -3,22 +3,22 @@ from summary import *
 
 app = Flask(__name__)
 
-# Define a sample API endpoint
-
-
 @app.route('/api/hello', methods=['GET'])
 def hello():
     return jsonify({"message": "Hello, World!"})
 
-# http://127.0.0.1:5000/api/map?year=2015&year=2016&year=2017
-# http://127.0.0.1:5000/api/map
-@app.route('/api/map', methods=['GET'])
+# http://127.0.0.1:5000/api/summary/map?year=2015&year=2016&year=2017
+# http://127.0.0.1:5000/api/summary/map
+
+@app.route('/api/summary/map', methods=['GET'])
 def map_route():
     years_list = request.args.getlist('year')
-    if not years_list:
-        years_list = ['2015', '2016', '2017']
-    years = ' ,'.join(years_list)
-    return jsonify(get_map_data(years))
+    return jsonify(get_map_data(years_list))
+
+@app.route('/api/summary/gender', methods=['GET'])
+def gender_route():
+    years_list = request.args.getlist('year')
+    return jsonify(get_gender_data(years_list))
 
 
 if __name__ == '__main__':

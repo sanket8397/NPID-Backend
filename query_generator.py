@@ -20,3 +20,18 @@ def get_map_query(years):
             GROUP BY ?stateName
         """
     return map_query
+
+def get_gender_query(years):
+    map_query = f"""
+            {prefixes}
+
+            SELECT ?gender (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:hasGender ?gender.
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?gender
+        """
+    return map_query

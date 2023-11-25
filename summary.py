@@ -1,8 +1,10 @@
 from query_generator import *
 from utils import *
 
-# Year functionality yet to add
-def get_map_data(years):
+def get_map_data(years_list):
+    if not years_list:
+        years_list = ['2015', '2016', '2017']
+    years = ' ,'.join(years_list)
     query = get_map_query(years)
     results = execute_sparql(query)
     # print(results)
@@ -17,3 +19,24 @@ def get_map_data(years):
         state_victim_data.append(state_victim_count)
 
     return state_victim_data
+
+def get_gender_data(years_list):
+    if not years_list:
+        years_list = ['2015', '2016', '2017']
+    years = ' ,'.join(years_list)
+    print(years)
+    query = get_gender_query(years)
+    results = execute_sparql(query)
+    # print(results)
+
+    victim_data = []
+    for result in results["results"]["bindings"]:
+        gender = result["gender"]["value"]
+        victim_cnt = result["victimCount"]["value"]
+        victim_count = {}
+        victim_count["gender"] = "Male" if gender == "M" else "Female" 
+        victim_count["count"] = victim_cnt
+        victim_data.append(victim_count)
+
+    return victim_data
+
