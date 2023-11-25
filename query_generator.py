@@ -95,3 +95,18 @@ def get_fleeing_query(years):
             GROUP BY ?fleeing
         """
     return query
+
+def get_mental_illness_query(years):
+    query = f"""
+            {prefixes}
+
+            SELECT ?mental_illness (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:hasMentalIllness ?mental_illness.
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?mental_illness
+        """
+    return query

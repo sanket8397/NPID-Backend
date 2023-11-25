@@ -40,5 +40,10 @@ def fleeing_route():
     years_list = request.args.getlist('year')
     return jsonify(get_fleeing_data(years_list))
 
+@app.route('/api/summary/mentalillness', methods=['GET'])
+def mental_illness_route():
+    years_list = request.args.getlist('year')
+    return jsonify(get_mental_illness_data(years_list))
+
 if __name__ == '__main__':
     app.run(debug=True)
