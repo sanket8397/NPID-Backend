@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from summary import *
 from state_city import *
 from temporal import *
+from details import *
 
 app = Flask(__name__)
 
@@ -106,6 +107,12 @@ def temporal_race_count_route():
 
 ######################### Temporal Routes ############################
 
+######################### Details Routes ############################
+@app.route('/api/details', methods=['GET'])
+def details_route():
+    return jsonify(get_victim_details_data())
+
+######################### Details Routes ############################
 
 if __name__ == '__main__':
     app.run(debug=True)

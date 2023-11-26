@@ -259,3 +259,33 @@ def get_year_race_count_query():
     return query
 
 ######################### Temporal Queries ############################
+
+######################### Detail Queries ############################
+
+def get_victim_details_query():
+    query = f"""
+            {prefixes}
+
+            SELECT ?name 
+                    (STR(?victimage) as ?age) 
+                    ?race 
+                    (STR(?victimyear) as ?year)
+                    ?gender
+                    ?mentalillness
+                    ?mannerofdeath
+                    ?weapon
+            WHERE {{
+                ?victim rdf:type ont:victim .
+                ?victim ont:hasName ?name .
+                ?victim ont:hasAge ?victimage .
+                ?victim ont:deathYear ?victimyear .
+                ?victim ont:hasRace ?race .
+                ?victim ont:hasGender ?gender .
+                ?victim ont:hasMentalIllness ?mentalillness .
+                ?victim ont:mannerOfDeath ?mannerofdeath .
+                ?victim ont:wasArmedWith ?weapon .
+            }}
+        """
+    return query
+
+######################### Detail Queries ############################
