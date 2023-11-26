@@ -74,5 +74,11 @@ def cities_highschool_grad_rate_route():
     cities = get_cities_original(state)
     return jsonify(get_highschool_grad_rate(cities))
 
+@app.route('/api/statecity/citiesvictimcount', methods=['GET'])
+def cities_count_route():
+    state = request.args.get('state')
+    cities = get_cities_original(state)
+    return jsonify(get_cities_count_data(cities))
+
 if __name__ == '__main__':
     app.run(debug=True)

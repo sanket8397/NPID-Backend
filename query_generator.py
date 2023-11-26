@@ -170,5 +170,19 @@ def get_highschool_grad_rate_query(cities):
         """
     return query
 
+def get_cities_count_query(cities):
+    query = f"""
+            {prefixes}
+
+            SELECT ?cityName (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:livesInCity ?city.
+                ?city ont:cityName ?cityName.
+                FILTER(?cityName IN ({cities}))
+            }}
+            GROUP BY ?cityName
+        """
+    return query
 
 ######################### State City Queries ############################

@@ -71,3 +71,20 @@ def get_highschool_grad_rate(citiesList):
         highschool_grad_rate_data.append(city_highschool_grad_rate)
 
     return highschool_grad_rate_data
+
+def get_cities_count_data(citiesList):
+    cities = "', '".join(citiesList)
+    cities = "'" + cities + "'"
+    query = get_cities_count_query(cities)
+    results = execute_sparql(query)
+
+    city_victim_data = []
+    for result in results["results"]["bindings"]:
+        city = result["cityName"]["value"]
+        victim_count = result["victimCount"]["value"]
+        city_victim_count = {}
+        city_victim_count["city"] = city.split(" - ")[1]
+        city_victim_count["count"] = victim_count
+        city_victim_data.append(city_victim_count)
+
+    return city_victim_data
