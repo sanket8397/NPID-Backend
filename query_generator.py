@@ -226,3 +226,21 @@ def get_cities_race_count_query(cities):
     return query
 
 ######################### State City Queries ############################
+
+######################### Temporal Queries ############################
+
+def get_year_count_query():
+    query = f"""
+            {prefixes}
+
+            SELECT (STR(?year) as ?deathYear) (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?year.
+            }}
+            GROUP BY ?year
+            ORDER BY ?year
+        """
+    return query
+
+######################### Temporal Queries ############################
