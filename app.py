@@ -100,6 +100,10 @@ def cities_race_count_route():
 def temporal_count_route():
     return jsonify(get_temporal_data())
 
+@app.route('/api/temporal/racecount', methods=['GET'])
+def temporal_race_count_route():
+    return jsonify(get_year_race_count_data())
+
 ######################### Temporal Routes ############################
 
 

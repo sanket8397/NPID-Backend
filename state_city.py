@@ -123,7 +123,8 @@ def get_cities_race_count_data(citiesList):
         victim_count = result["victimCount"]["value"]
         city_victim_count = {}
         city_victim_count["city"] = city.split(" - ")[1]
-        city_victim_count[race_mapping[race]] = victim_count
+        city_victim_count["race"] = race_mapping[race]
+        city_victim_count["count"] = victim_count
         city_victim_data.append(city_victim_count)
 
     return city_victim_data

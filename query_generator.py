@@ -243,4 +243,19 @@ def get_year_count_query():
         """
     return query
 
+def get_year_race_count_query():
+    query = f"""
+            {prefixes}
+
+            SELECT (STR(?year) as ?deathYear) ?race (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+            ?victim rdf:type ont:victim .
+            ?victim ont:deathYear ?year .
+            ?victim ont:hasRace ?race .
+            }}
+            GROUP BY ?year ?race
+            ORDER BY ?year ?race
+        """
+    return query
+
 ######################### Temporal Queries ############################
