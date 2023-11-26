@@ -207,4 +207,22 @@ def get_cities_race_distribution_query(cities):
             }}
         """
     return query
+
+def get_cities_race_count_query(cities):
+    query = f"""
+            {prefixes}
+
+            SELECT ?cityName ?race (str(COUNT(?victim)) as ?victimCount)
+            WHERE {{
+                ?city rdf:type ont:city .
+                ?city ont:cityName ?cityName .
+                ?victim rdf:type ont:victim .
+                ?victim ont:livesInCity ?city .
+                ?victim ont:hasRace ?race .
+                FILTER(?cityName IN ({cities}))
+            }}
+            GROUP BY ?cityName ?race
+        """
+    return query
+
 ######################### State City Queries ############################

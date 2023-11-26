@@ -74,7 +74,7 @@ def cities_highschool_grad_rate_route():
     cities = get_cities_original(state)
     return jsonify(get_highschool_grad_rate(cities))
 
-@app.route('/api/statecity/citiesvictimcount', methods=['GET'])
+@app.route('/api/statecity/cityvictimcount', methods=['GET'])
 def cities_count_route():
     state = request.args.get('state')
     cities = get_cities_original(state)
@@ -85,6 +85,13 @@ def cities_race_distribution_route():
     state = request.args.get('state')
     cities = get_cities_original(state)
     return jsonify(get_cities_race_data(cities))
+
+@app.route('/api/statecity/cityracevictimcount', methods=['GET'])
+def cities_race_count_route():
+    state = request.args.get('state')
+    cities = get_cities_original(state)
+    return jsonify(get_cities_race_count_data(cities))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -107,3 +107,23 @@ def get_cities_race_data(citiesList):
         city_race_data.append(city_race)
 
     return city_race_data
+
+def get_cities_race_count_data(citiesList):
+    cities = "', '".join(citiesList)
+    cities = "'" + cities + "'"
+    query = get_cities_race_count_query(cities)
+    results = execute_sparql(query)
+
+    race_mapping = {"W": "White", "H": "Hispanic", "A": "Asian", "B": "Black", "N": "Native American", "O": "Other"}
+
+    city_victim_data = []
+    for result in results["results"]["bindings"]:
+        city = result["cityName"]["value"]
+        race = result["race"]["value"]
+        victim_count = result["victimCount"]["value"]
+        city_victim_count = {}
+        city_victim_count["city"] = city.split(" - ")[1]
+        city_victim_count[race_mapping[race]] = victim_count
+        city_victim_data.append(city_victim_count)
+
+    return city_victim_data
