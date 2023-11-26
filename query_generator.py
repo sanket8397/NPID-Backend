@@ -185,4 +185,26 @@ def get_cities_count_query(cities):
         """
     return query
 
+def get_cities_race_distribution_query(cities):
+    query = f"""
+            {prefixes}
+
+            SELECT ?cityName 
+                    (str(?asiandemo) as ?asian) 
+                    (str(?blackdemo) as ?black)
+                    (str(?hispanicdemo) as ?hispanic)
+                    (str(?nativeamericandemo) as ?nativeamerican)
+                    (str(?whitedemo) as ?white)
+            WHERE {{
+                ?city ont:cityName ?cityName.
+                ?city ont:hasDemographicDetails ?demo.
+                ?demo ont:hasAsian ?asiandemo.
+                ?demo ont:hasBlack ?blackdemo.
+                ?demo ont:hasHispanic ?hispanicdemo.
+                ?demo ont:hasNativeAmerican ?nativeamericandemo.
+                ?demo ont:hasWhites ?whitedemo.
+                FILTER(?cityName IN ({cities}))
+            }}
+        """
+    return query
 ######################### State City Queries ############################

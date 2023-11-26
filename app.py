@@ -80,5 +80,11 @@ def cities_count_route():
     cities = get_cities_original(state)
     return jsonify(get_cities_count_data(cities))
 
+@app.route('/api/statecity/cityrace', methods=['GET'])
+def cities_race_distribution_route():
+    state = request.args.get('state')
+    cities = get_cities_original(state)
+    return jsonify(get_cities_race_data(cities))
+
 if __name__ == '__main__':
     app.run(debug=True)
