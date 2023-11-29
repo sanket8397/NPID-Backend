@@ -23,6 +23,7 @@ def get_map_query(years):
         """
     return query
 
+
 def get_gender_query(years):
     query = f"""
             {prefixes}
@@ -37,6 +38,25 @@ def get_gender_query(years):
             GROUP BY ?gender
         """
     return query
+
+
+def get_gender_state_query(years, state):
+    query = f"""
+            {prefixes}
+
+            SELECT ?gender (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:hasGender ?gender.
+                ?victim ont:livesInState ?state.
+                ?state ont:hasStateName "{state}".
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?gender
+        """
+    return query
+
 
 def get_race_query(years):
     query = f"""
@@ -53,6 +73,25 @@ def get_race_query(years):
         """
     return query
 
+
+def get_race_state_query(years, state):
+    query = f"""
+            {prefixes}
+
+            SELECT ?race (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:hasRace ?race.
+                ?victim ont:livesInState ?state.
+                ?state ont:hasStateName "{state}".
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?race
+        """
+    return query
+
+
 def get_manner_of_death_query(years):
     query = f"""
             {prefixes}
@@ -67,6 +106,25 @@ def get_manner_of_death_query(years):
             GROUP BY ?manner_of_death
         """
     return query
+
+
+def get_manner_of_death_state_query(years, state):
+    query = f"""
+            {prefixes}
+
+            SELECT ?manner_of_death (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:mannerOfDeath ?manner_of_death.
+                ?victim ont:livesInState ?state.
+                ?state ont:hasStateName "{state}".
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?manner_of_death
+        """
+    return query
+
 
 def get_armed_with_query(years):
     query = f"""
@@ -83,6 +141,25 @@ def get_armed_with_query(years):
         """
     return query
 
+
+def get_armed_with_state_query(years, state):
+    query = f"""
+            {prefixes}
+
+            SELECT ?weapon (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:wasArmedWith ?weapon.
+                ?victim ont:livesInState ?state.
+                ?state ont:hasStateName "{state}".
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?weapon
+        """
+    return query
+
+
 def get_fleeing_query(years):
     query = f"""
             {prefixes}
@@ -97,6 +174,25 @@ def get_fleeing_query(years):
             GROUP BY ?fleeing
         """
     return query
+
+
+def get_fleeing_state_query(years, state):
+    query = f"""
+            {prefixes}
+
+            SELECT ?fleeing (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:wasFleeing ?fleeing.
+                ?victim ont:livesInState ?state.
+                ?state ont:hasStateName "{state}".
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?fleeing
+        """
+    return query
+
 
 def get_mental_illness_query(years):
     query = f"""
@@ -113,9 +209,28 @@ def get_mental_illness_query(years):
         """
     return query
 
+
+def get_mental_illness_state_query(years, state):
+    query = f"""
+            {prefixes}
+
+            SELECT ?mental_illness (STR(COUNT(?victim)) AS ?victimCount)
+            WHERE {{
+                ?victim rdf:type ont:victim.
+                ?victim ont:deathYear ?deathyear.
+                ?victim ont:hasMentalIllness ?mental_illness.
+                ?victim ont:livesInState ?state.
+                ?state ont:hasStateName "{state}".
+                FILTER(?deathyear IN ({years}))
+            }}
+            GROUP BY ?mental_illness
+        """
+    return query
+
 ######################### Summary Queries ############################
 
 ######################### State City Queries ############################
+
 
 def get_cities_query(state):
     query = f"""
@@ -131,6 +246,7 @@ def get_cities_query(state):
         """
     return query
 
+
 def get_median_income_query(cities):
     query = f"""
             {prefixes}
@@ -143,6 +259,7 @@ def get_median_income_query(cities):
             }}
         """
     return query
+
 
 def get_poverty_query(cities):
     query = f"""
@@ -157,6 +274,7 @@ def get_poverty_query(cities):
         """
     return query
 
+
 def get_highschool_grad_rate_query(cities):
     query = f"""
             {prefixes}
@@ -169,6 +287,7 @@ def get_highschool_grad_rate_query(cities):
             }}
         """
     return query
+
 
 def get_cities_count_query(cities):
     query = f"""
@@ -184,6 +303,7 @@ def get_cities_count_query(cities):
             GROUP BY ?cityName
         """
     return query
+
 
 def get_cities_race_distribution_query(cities):
     query = f"""
@@ -208,6 +328,7 @@ def get_cities_race_distribution_query(cities):
         """
     return query
 
+
 def get_cities_race_count_query(cities):
     query = f"""
             {prefixes}
@@ -229,6 +350,7 @@ def get_cities_race_count_query(cities):
 
 ######################### Temporal Queries ############################
 
+
 def get_year_count_query():
     query = f"""
             {prefixes}
@@ -242,6 +364,7 @@ def get_year_count_query():
             ORDER BY ?year
         """
     return query
+
 
 def get_year_race_count_query():
     query = f"""
@@ -261,6 +384,7 @@ def get_year_race_count_query():
 ######################### Temporal Queries ############################
 
 ######################### Detail Queries ############################
+
 
 def get_victim_details_query():
     query = f"""

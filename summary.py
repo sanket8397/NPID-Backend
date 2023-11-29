@@ -1,6 +1,7 @@
 from query_generator import *
 from utils import *
 
+
 def get_map_data(years_list):
     if not years_list:
         years_list = ['2015', '2016', '2017']
@@ -19,71 +20,75 @@ def get_map_data(years_list):
 
     return state_victim_data
 
-def get_gender_data(years_list):
+
+def get_gender_data(years_list, state):
     if not years_list:
         years_list = ['2015', '2016', '2017']
     years = ' ,'.join(years_list)
-    print(years)
+
     query = get_gender_query(years)
+    if state:
+        query = get_gender_state_query(years, state)
     results = execute_sparql(query)
 
-    victim_data = []
+    victim_data = {}
     for result in results["results"]["bindings"]:
-        gender = result["gender"]["value"]
+        gender = "Male" if result["gender"]["value"] == "M" else "Female"
         victim_cnt = result["victimCount"]["value"]
-        victim_count = {}
-        victim_count["gender"] = "Male" if gender == "M" else "Female" 
-        victim_count["count"] = victim_cnt
-        victim_data.append(victim_count)
+        victim_data[gender] = int(victim_cnt)
 
     return victim_data
 
-def get_race_data(years_list):
+
+def get_race_data(years_list, state):
     if not years_list:
         years_list = ['2015', '2016', '2017']
     years = ' ,'.join(years_list)
-    print(years)
+
     query = get_race_query(years)
+    if state:
+        query = get_race_state_query(years, state)
     results = execute_sparql(query)
 
-    race_mapping = {"W": "White", "H": "Hispanic", "A": "Asian", "B": "Black", "N": "Native American", "O": "Other"}
+    race_mapping = {"W": "White", "H": "Hispanic", "A": "Asian",
+                    "B": "Black", "N": "Native American", "O": "Other"}
 
-    victim_data = []
+    victim_data = {}
     for result in results["results"]["bindings"]:
         race = result["race"]["value"]
         victim_cnt = result["victimCount"]["value"]
-        victim_count = {}
-        victim_count["race"] = race_mapping[race] 
-        victim_count["count"] = victim_cnt
-        victim_data.append(victim_count)
+        victim_data[race_mapping[race]] = int(victim_cnt)
 
     return victim_data
 
-def get_manner_of_death_data(years_list):
+
+def get_manner_of_death_data(years_list, state):
     if not years_list:
         years_list = ['2015', '2016', '2017']
     years = ' ,'.join(years_list)
-    print(years)
+
     query = get_manner_of_death_query(years)
+    if state:
+        query = get_manner_of_death_state_query(years, state)
     results = execute_sparql(query)
 
-    victim_data = []
+    victim_data = {}
     for result in results["results"]["bindings"]:
         manner_of_death = result["manner_of_death"]["value"]
         victim_cnt = result["victimCount"]["value"]
-        victim_count = {}
-        victim_count["manner_of_death"] = manner_of_death
-        victim_count["count"] = victim_cnt
-        victim_data.append(victim_count)
+        victim_data[manner_of_death] = int(victim_cnt)
 
     return victim_data
 
-def get_armed_with_data(years_list):
+
+def get_armed_with_data(years_list, state):
     if not years_list:
         years_list = ['2015', '2016', '2017']
     years = ' ,'.join(years_list)
-    print(years)
+
     query = get_armed_with_query(years)
+    if state:
+        query = get_armed_with_state_query(years, state)
     results = execute_sparql(query)
 
     victim_data = []
@@ -97,40 +102,40 @@ def get_armed_with_data(years_list):
 
     return victim_data
 
-def get_fleeing_data(years_list):
+
+def get_fleeing_data(years_list, state):
     if not years_list:
         years_list = ['2015', '2016', '2017']
     years = ' ,'.join(years_list)
-    print(years)
+
     query = get_fleeing_query(years)
+    if state:
+        query = get_fleeing_state_query(years, state)
     results = execute_sparql(query)
 
-    victim_data = []
+    victim_data = {}
     for result in results["results"]["bindings"]:
         fleeing = result["fleeing"]["value"]
         victim_cnt = result["victimCount"]["value"]
-        victim_count = {}
-        victim_count["fleeing"] = fleeing
-        victim_count["count"] = victim_cnt
-        victim_data.append(victim_count)
+        victim_data[fleeing] = int(victim_cnt)
 
     return victim_data
 
-def get_mental_illness_data(years_list):
+
+def get_mental_illness_data(years_list, state):
     if not years_list:
         years_list = ['2015', '2016', '2017']
     years = ' ,'.join(years_list)
-    print(years)
+
     query = get_mental_illness_query(years)
+    if state:
+        query = get_mental_illness_state_query(years, state)
     results = execute_sparql(query)
 
-    victim_data = []
+    victim_data = {}
     for result in results["results"]["bindings"]:
-        mental_illness = result["mental_illness"]["value"]
+        mental_illness = "yes" if result["mental_illness"]["value"] == "true" else "no"
         victim_cnt = result["victimCount"]["value"]
-        victim_count = {}
-        victim_count["mental_illness"] = "yes" if mental_illness == "true" else "no"
-        victim_count["count"] = victim_cnt
-        victim_data.append(victim_count)
+        victim_data[mental_illness] = int(victim_cnt)
 
     return victim_data

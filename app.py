@@ -29,37 +29,44 @@ def map_route():
 @app.route('/api/summary/gender', methods=['GET'])
 def gender_route():
     years_list = request.args.getlist('year')
-    return jsonify(get_gender_data(years_list))
+    state = request.args.get('state')
+    return jsonify(get_gender_data(years_list, state))
 
 
 @app.route('/api/summary/race', methods=['GET'])
 def race_route():
     years_list = request.args.getlist('year')
-    return jsonify(get_race_data(years_list))
+    state = request.args.get('state')
+    print(state)
+    return jsonify(get_race_data(years_list, state))
 
 
 @app.route('/api/summary/mannerofdeath', methods=['GET'])
 def manner_of_death_route():
     years_list = request.args.getlist('year')
-    return jsonify(get_manner_of_death_data(years_list))
+    state = request.args.get('state')
+    return jsonify(get_manner_of_death_data(years_list, state))
 
 
 @app.route('/api/summary/armedwith', methods=['GET'])
 def armed_with_route():
     years_list = request.args.getlist('year')
-    return jsonify(get_armed_with_data(years_list))
+    state = request.args.get('state')
+    return jsonify(get_armed_with_data(years_list, state))
 
 
 @app.route('/api/summary/fleeing', methods=['GET'])
 def fleeing_route():
     years_list = request.args.getlist('year')
-    return jsonify(get_fleeing_data(years_list))
+    state = request.args.get('state')
+    return jsonify(get_fleeing_data(years_list, state))
 
 
 @app.route('/api/summary/mentalillness', methods=['GET'])
 def mental_illness_route():
     years_list = request.args.getlist('year')
-    return jsonify(get_mental_illness_data(years_list))
+    state = request.args.get('state')
+    return jsonify(get_mental_illness_data(years_list, state))
 
 ######################### Summary routes ############################
 
@@ -91,6 +98,13 @@ def cities_highschool_grad_rate_route():
     state = request.args.get('state')
     cities = get_cities_original(state)
     return jsonify(get_highschool_grad_rate(cities))
+
+
+@app.route('/api/statecity/rates', methods=['GET'])
+def cities_rate_route():
+    state = request.args.get('state')
+    cities = get_cities_original(state)
+    return jsonify(get_rates(cities))
 
 
 @app.route('/api/statecity/cityvictimcount', methods=['GET'])
