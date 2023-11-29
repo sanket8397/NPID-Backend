@@ -73,6 +73,11 @@ def mental_illness_route():
 ######################### State City routes ############################
 
 
+@app.route('/api/statecity/states', methods=['GET'])
+def states_route():
+    return jsonify(get_states())
+
+
 @app.route('/api/statecity/cities', methods=['GET'])
 def cities_route():
     state = request.args.get('state')

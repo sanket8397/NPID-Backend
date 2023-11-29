@@ -1,6 +1,61 @@
 from query_generator import *
 from utils import *
 
+state_mapping = {
+    'AL': 'Alabama',
+    'AK': 'Alaska',
+    'AZ': 'Arizona',
+    'AR': 'Arkansas',
+    'CA': 'California',
+    'CO': 'Colorado',
+    'CT': 'Connecticut',
+    'DE': 'Delaware',
+    'DC': 'District of Columbia',
+    'FL': 'Florida',
+    'GA': 'Georgia',
+    'HI': 'Hawaii',
+    'ID': 'Idaho',
+    'IL': 'Illinois',
+    'IN': 'Indiana',
+    'IA': 'Iowa',
+    'KS': 'Kansas',
+    'KY': 'Kentucky',
+    'LA': 'Louisiana',
+    'ME': 'Maine',
+    'MD': 'Maryland',
+    'MA': 'Massachusetts',
+    'MI': 'Michigan',
+    'MN': 'Minnesota',
+    'MS': 'Mississippi',
+    'MO': 'Missouri',
+    'MT': 'Montana',
+    'NE': 'Nebraska',
+    'NV': 'Nevada',
+    'NH': 'New Hampshire',
+    'NJ': 'New Jersey',
+    'NM': 'New Mexico',
+    'NY': 'New York',
+    'NC': 'North Carolina',
+    'ND': 'North Dakota',
+    'OH': 'Ohio',
+    'OK': 'Oklahoma',
+    'OR': 'Oregon',
+    'PA': 'Pennsylvania',
+    'RI': 'Rhode Island',
+    'SC': 'South Carolina',
+    'SD': 'South Dakota',
+    'TN': 'Tennessee',
+    'TX': 'Texas',
+    'UT': 'Utah',
+    'VT': 'Vermont',
+    'VA': 'Virginia',
+    'WA': 'Washington',
+    'WV': 'West Virginia',
+    'WI': 'Wisconsin',
+    'WY': 'Wyoming',
+    'PR': 'Puerto Rico',
+}
+
 
 def get_map_data(years_list):
     if not years_list:
@@ -9,14 +64,11 @@ def get_map_data(years_list):
     query = get_map_query(years)
     results = execute_sparql(query)
 
-    state_victim_data = []
+    state_victim_data = {}
     for result in results["results"]["bindings"]:
         state_name = result["stateName"]["value"]
         victim_count = result["victimCount"]["value"]
-        state_victim_count = {}
-        state_victim_count["name"] = state_name
-        state_victim_count["count"] = victim_count
-        state_victim_data.append(state_victim_count)
+        state_victim_data[state_mapping[state_name]] = int(victim_count)
 
     return state_victim_data
 

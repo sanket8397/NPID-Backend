@@ -2,6 +2,16 @@ from query_generator import *
 from utils import *
 
 
+def get_states():
+    query = get_states_query()
+    results = execute_sparql(query)
+    states = []
+    for result in results["results"]["bindings"]:
+        state = result["stateName"]["value"]
+        states.append(state)
+    return states
+
+
 def get_cities_original(state):
     query = get_cities_query(state)
     results = execute_sparql(query)
