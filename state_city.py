@@ -50,6 +50,7 @@ def get_median_income(citiesList):
         city_income["deaths"] = death_count[city]
         income_data.append(city_income)
 
+    income_data = sorted(income_data, key=lambda k: k['city'])
     return income_data
 
 
@@ -65,6 +66,7 @@ def get_rates(citiesList):
         city_data["percent_completed_hs"] = grad_rate[city]
         city_data["deaths"] = death_count[city]
         data.append(city_data)
+    data = sorted(data, key=lambda k: k['city'])
     return data
 
 
@@ -96,6 +98,7 @@ def get_highschool_grad_rate(citiesList):
         city = city.split(" - ")[1]
         highschool_grad_rate_data[city] = float(highschool_grad_rate)
 
+    highschool_grad_rate_data = dict(sorted(highschool_grad_rate_data.items()))
     return highschool_grad_rate_data
 
 
@@ -131,6 +134,8 @@ def get_cities_race_data(citiesList):
         city_race["white"] = float(result["white"]["value"])
         city_race_data.append(city_race)
 
+    # Sort the 'city_race_date' with 'city'
+    city_race_data = sorted(city_race_data, key=lambda x: x['city'])
     return city_race_data
 
 
@@ -160,5 +165,7 @@ def get_cities_race_count_data(citiesList):
         for race in city_victim_data[city]:
             temp[race] = city_victim_data[city][race]
         data.append(temp)
+    # Sort the data with 'city'
+    sortedData = sorted(data, key=lambda x: x['city'])
 
-    return data
+    return sortedData
