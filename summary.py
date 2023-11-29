@@ -59,7 +59,7 @@ state_mapping = {
 
 def get_map_data(years_list):
     if not years_list:
-        years_list = ['2015', '2016', '2017']
+        years_list = []
     years = ' ,'.join(years_list)
     query = get_map_query(years)
     results = execute_sparql(query)
@@ -75,7 +75,7 @@ def get_map_data(years_list):
 
 def get_gender_data(years_list, state):
     if not years_list:
-        years_list = ['2015', '2016', '2017']
+        years_list = []
     years = ' ,'.join(years_list)
 
     query = get_gender_query(years)
@@ -94,7 +94,7 @@ def get_gender_data(years_list, state):
 
 def get_race_data(years_list, state):
     if not years_list:
-        years_list = ['2015', '2016', '2017']
+        years_list = []
     years = ' ,'.join(years_list)
 
     query = get_race_query(years)
@@ -116,7 +116,7 @@ def get_race_data(years_list, state):
 
 def get_manner_of_death_data(years_list, state):
     if not years_list:
-        years_list = ['2015', '2016', '2017']
+        years_list = []
     years = ' ,'.join(years_list)
 
     query = get_manner_of_death_query(years)
@@ -135,7 +135,7 @@ def get_manner_of_death_data(years_list, state):
 
 def get_armed_with_data(years_list, state):
     if not years_list:
-        years_list = ['2015', '2016', '2017']
+        years_list = []
     years = ' ,'.join(years_list)
 
     query = get_armed_with_query(years)
@@ -157,7 +157,7 @@ def get_armed_with_data(years_list, state):
 
 def get_fleeing_data(years_list, state):
     if not years_list:
-        years_list = ['2015', '2016', '2017']
+        years_list = []
     years = ' ,'.join(years_list)
 
     query = get_fleeing_query(years)
@@ -176,7 +176,7 @@ def get_fleeing_data(years_list, state):
 
 def get_mental_illness_data(years_list, state):
     if not years_list:
-        years_list = ['2015', '2016', '2017']
+        years_list = []
     years = ' ,'.join(years_list)
 
     query = get_mental_illness_query(years)
