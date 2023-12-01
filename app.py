@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 from summary import *
 from state_city import *
@@ -11,6 +11,7 @@ CORS(app)
 
 
 @app.route('/api/hello', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def hello():
     return jsonify({"message": "Hello, World!"})
 
@@ -21,12 +22,14 @@ def hello():
 
 
 @app.route('/api/summary/map', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def map_route():
     years_list = request.args.getlist('year')
     return jsonify(get_map_data(years_list))
 
 
 @app.route('/api/summary/gender', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def gender_route():
     years_list = request.args.getlist('year')
     state = request.args.get('state')
@@ -34,6 +37,7 @@ def gender_route():
 
 
 @app.route('/api/summary/race', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def race_route():
     years_list = request.args.getlist('year')
     state = request.args.get('state')
@@ -42,6 +46,7 @@ def race_route():
 
 
 @app.route('/api/summary/mannerofdeath', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def manner_of_death_route():
     years_list = request.args.getlist('year')
     state = request.args.get('state')
@@ -49,6 +54,7 @@ def manner_of_death_route():
 
 
 @app.route('/api/summary/armedwith', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def armed_with_route():
     years_list = request.args.getlist('year')
     state = request.args.get('state')
@@ -56,6 +62,7 @@ def armed_with_route():
 
 
 @app.route('/api/summary/fleeing', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def fleeing_route():
     years_list = request.args.getlist('year')
     state = request.args.get('state')
@@ -63,6 +70,7 @@ def fleeing_route():
 
 
 @app.route('/api/summary/mentalillness', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def mental_illness_route():
     years_list = request.args.getlist('year')
     state = request.args.get('state')
@@ -74,17 +82,20 @@ def mental_illness_route():
 
 
 @app.route('/api/statecity/states', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def states_route():
     return jsonify(get_states())
 
 
 @app.route('/api/statecity/cities', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def cities_route():
     state = request.args.get('state')
     return jsonify(get_cities(state))
 
 
 @app.route('/api/statecity/income', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def cities_income_route():
     state = request.args.get('state')
     cities = get_cities_original(state)
@@ -92,6 +103,7 @@ def cities_income_route():
 
 
 @app.route('/api/statecity/poverty', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def cities_poverty_route():
     state = request.args.get('state')
     cities = get_cities_original(state)
@@ -99,6 +111,7 @@ def cities_poverty_route():
 
 
 @app.route('/api/statecity/gradrate', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def cities_highschool_grad_rate_route():
     state = request.args.get('state')
     cities = get_cities_original(state)
@@ -106,6 +119,7 @@ def cities_highschool_grad_rate_route():
 
 
 @app.route('/api/statecity/rates', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def cities_rate_route():
     state = request.args.get('state')
     cities = get_cities_original(state)
@@ -113,6 +127,7 @@ def cities_rate_route():
 
 
 @app.route('/api/statecity/cityvictimcount', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def cities_count_route():
     state = request.args.get('state')
     cities = get_cities_original(state)
@@ -120,6 +135,7 @@ def cities_count_route():
 
 
 @app.route('/api/statecity/cityrace', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def cities_race_distribution_route():
     state = request.args.get('state')
     cities = get_cities_original(state)
@@ -127,6 +143,7 @@ def cities_race_distribution_route():
 
 
 @app.route('/api/statecity/cityracevictimcount', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def cities_race_count_route():
     state = request.args.get('state')
     cities = get_cities_original(state)
@@ -138,11 +155,13 @@ def cities_race_count_route():
 
 
 @app.route('/api/temporal/count', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def temporal_count_route():
     return jsonify(get_temporal_data())
 
 
 @app.route('/api/temporal/racecount', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def temporal_race_count_route():
     return jsonify(get_year_race_count_data())
 
@@ -152,6 +171,7 @@ def temporal_race_count_route():
 
 
 @app.route('/api/details', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def details_route():
     return jsonify(get_victim_details_data())
 
