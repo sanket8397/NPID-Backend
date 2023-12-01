@@ -7,7 +7,7 @@ from temporal import *
 from details import *
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins='*')
 
 
 @app.route('/api/hello', methods=['GET'])
@@ -159,4 +159,4 @@ def details_route():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host= '0.0.0.0')
