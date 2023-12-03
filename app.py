@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS, cross_origin
-
+from flask_cors import CORS
+import os
+import argparse
 from summary import *
 from state_city import *
 from temporal import *
@@ -159,4 +160,11 @@ def details_route():
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Start the app with a custom Fuseki URL.')
+    parser.add_argument('--fuseki_url', type=str, help='The Fuseki URL to use.')
+
+    args = parser.parse_args()
+
+    if args.fuseki_url:
+        os.environ['FUSEKI_URL'] = args.fuseki_url
     app.run(debug=True, host= '0.0.0.0')

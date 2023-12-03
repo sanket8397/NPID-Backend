@@ -1,6 +1,7 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
+import os
 
-fuseki_url = "http://23.22.158.11:3030/ds/query"
+fuseki_url = os.getenv('FUSEKI_URL', 'http://127.0.0.1:3030/ds/query')
 sparql = SPARQLWrapper(fuseki_url)
 
 
