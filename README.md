@@ -8,4 +8,4 @@ Setup instructions:
 - Download the backend zip folder from the master branch of this GitHub repository
 - unzip the downloaded folder and open it in any editor like VS code
 - Installing all the requirements using the command - pip install -r requirements.txt
-- Running Flask server using command - python3 app.py -- fuseki_url
+- Running Flask server using command - python3 app.py --fuseki_url "http://localhost:3030/ds/query"
